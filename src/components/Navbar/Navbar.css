@@ -1,0 +1,13 @@
+.Navbar {
+  margin-bottom: 20px;
+  background: #026aa7;
+}
+
+.Navbar .Navbar-brand,
+.Navbar .NavLink {
+  color: #fff;
+}
+
+.Navbar .Navbar-nav {
+  justify-content: flex-end;
+}

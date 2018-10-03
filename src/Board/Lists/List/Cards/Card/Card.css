@@ -1,0 +1,40 @@
+.Card {
+  display: flex;
+  background-color: #fff;
+  border-color: #ccc;
+  margin-top: 8px;
+  border-radius: 3px;
+  padding: 6px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 1px 0 rgba(9, 45, 66, 0.25);
+  justify-content: space-between;
+  cursor: pointer;
+  max-height: 200px;
+}
+
+.Card:hover .card-edit {
+  opacity: 0.4;
+  transition: 1s;
+}
+
+.Card .card-title {
+  margin-bottom: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 30px;
+}
+
+.Card .card-edit {
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  opacity: 0;
+}
+
+.Card .card-edit:hover {
+  background-color: #ccc;
+  border-radius: 3px;
+  opacity: 1;
+  transition: 0.2s;
+}

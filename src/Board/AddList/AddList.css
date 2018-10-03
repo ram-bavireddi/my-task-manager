@@ -1,0 +1,44 @@
+.AddList {
+  width: 272px;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  border-radius: 3px;
+  height: auto;
+  min-height: 32px;
+  padding: 4px;
+}
+
+.AddList.OpenAddList {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #ccc;
+}
+
+.AddList.OpenAddList:hover {
+  background-color: #ccd;
+}
+
+.AddList.AddListControls {
+  background-color: rgb(223, 227, 230);
+}
+
+.AddList.AddListControls .list-name-input {
+  background: #fff;
+  border: 1px solid #5ba4cf;
+  box-shadow: 0 0 0 1px #5ba4cf;
+  display: block;
+  margin: 0;
+  width: 100%;
+  border-radius: 3px;
+  box-sizing: border-box;
+  line-height: 20px;
+  padding: 6px 8px;
+}
+
+.AddList.AddList.AddListControls .add-list-button {
+  margin-top: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}

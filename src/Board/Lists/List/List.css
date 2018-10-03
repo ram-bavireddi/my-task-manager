@@ -1,0 +1,13 @@
+.List {
+  background-color: rgb(223, 227, 230);
+  width: 272px;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  border-radius: 3px;
+  height: auto;
+  min-height: 32px;
+  padding: 4px;
+  margin-right: 10px;
+}

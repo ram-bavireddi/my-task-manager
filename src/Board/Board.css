@@ -1,0 +1,16 @@
+.board-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.board-content {
+  flex: 0.99;
+  min-height: 0;
+  display: flex;
+}
+
+.Board {
+  white-space: nowrap;
+  overflow-x: auto;
+}
