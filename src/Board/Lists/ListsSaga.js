@@ -9,7 +9,10 @@ export default class ListsSaga {
 
   static *fetchLists() {
     try {
-      const listsSnapshot = yield call(TaskManagerApi.getAll, '/lists');
+      const listsSnapshot = yield call(
+        TaskManagerApi.getAll,
+        TaskManagerApi.PATH_TO_LISTS
+      );
       const lists = yield call(ListsSaga.getLists, listsSnapshot);
       yield put(ListsActions.listsFetchSuccess(lists));
     } catch (e) {

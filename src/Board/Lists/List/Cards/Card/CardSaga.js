@@ -15,7 +15,9 @@ export default class CardSaga {
     try {
       yield call(
         TaskManagerApi.set,
-        `/lists/${action.listKey}/cards/${action.card.key}`,
+        `${TaskManagerApi.PATH_TO_LISTS}/${action.listKey}/cards/${
+          action.card.key
+        }`,
         {
           title: action.card.title
         }
@@ -30,7 +32,7 @@ export default class CardSaga {
     try {
       yield call(
         TaskManagerApi.remove,
-        `/lists/${action.listKey}/cards`,
+        `${TaskManagerApi.PATH_TO_LISTS}/${action.listKey}/cards`,
         action.cardKey
       );
       yield put(CardActions.cardDeleteSuccess(action.listKey, action.cardKey));

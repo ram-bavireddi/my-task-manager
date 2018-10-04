@@ -2,6 +2,9 @@ import { firebase } from './FirebaseConfig';
 import Objects from '../utils/Objects';
 
 export default class TaskManagerApi {
+
+  static PATH_TO_LISTS = '/lists';
+  
   static login(username, password) {
     return firebase
       .auth()

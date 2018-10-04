@@ -12,7 +12,7 @@ export default class AddCardSaga {
     try {
       const card = yield call(
         TaskManagerApi.save,
-        `/lists/${action.listKey}/cards`,
+        `${TaskManagerApi.PATH_TO_LISTS}/${action.listKey}/cards`,
         {
           title: action.cardTitle
         }

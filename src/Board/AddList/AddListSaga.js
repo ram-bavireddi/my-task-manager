@@ -9,9 +9,13 @@ export default class AddListSaga {
 
   static *addList(action) {
     try {
-      const list = yield call(TaskManagerApi.save, '/lists', {
-        name: action.listName
-      });
+      const list = yield call(
+        TaskManagerApi.save,
+        TaskManagerApi.PATH_TO_LISTS,
+        {
+          name: action.listName
+        }
+      );
       yield put(AddListActions.addListSuccess(list));
     } catch (e) {
       yield put(AddListActions.addListFailure({ message: e.message }));
