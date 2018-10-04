@@ -6,6 +6,7 @@ import './List.css';
 import AddCard from './AddCard/AddCard';
 import ListActions from './ListActions';
 import Card from './Cards/Card/Card';
+import CardActions from './Cards/Card/CardActions';
 
 class List extends Component {
   static propTypes = {
@@ -13,9 +14,27 @@ class List extends Component {
     cards: PropTypes.array
   };
 
+  constructor(props) {
+    super(props);
+    this.onDragOver = this.onDragOver.bind(this);
+    this.onDrop = this.onDrop.bind(this);
+  }
+
+  onDragOver(event) {
+    event.preventDefault();
+  }
+
+  onDrop(event) {
+    const cardData = JSON.parse(event.dataTransfer.getData('card'));
+    cardData['toList'] = this.props.list.key;
+    if (cardData.toList !== cardData.fromList) {
+      this.props.cardDnDRequest(cardData);
+    }
+  }
+
   render() {
     return (
-      <div className="List">
+      <div className="List" onDragOver={this.onDragOver} onDrop={this.onDrop}>
         <div className="font-weight-bold">{this.props.list.name}</div>
         <hr />
         {this.mapToCard()}
@@ -52,7 +71,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  listDidMount: list => dispatch(ListActions.listDidMount(list))
+  listDidMount: list => dispatch(ListActions.listDidMount(list)),
+  cardDnDRequest: cardDnD => dispatch(CardActions.cardDnDRequest(cardDnD))
 });
 
 export default connect(

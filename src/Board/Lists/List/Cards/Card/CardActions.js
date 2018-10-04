@@ -5,6 +5,9 @@ export default class CardActions {
   static CARD_DELETE_REQUEST = 'CARD_DELETE_REQUEST';
   static CARD_DELETE_SUCCESS = 'CARD_DELETE_SUCCESS';
   static CARD_DELETE_FAILURE = 'CARD_DELETE_FAILURE';
+  static CARD_DND_REQUEST = 'CARD_DND_REQUEST';
+  static CARD_DND_SUCCESS = 'CARD_DND_SUCCESS';
+  static CARD_DND_FAILURE = 'CARD_DND_FAILURE';
 
   static cardEditRequest(listKey, card) {
     return {
@@ -48,6 +51,27 @@ export default class CardActions {
   static cardDeleteFailure(error) {
     return {
       type: CardActions.CARD_DELETE_FAILURE,
+      error
+    };
+  }
+
+  static cardDnDRequest(cardDnD) {
+    return {
+      type: CardActions.CARD_DND_REQUEST,
+      cardDnD
+    };
+  }
+
+  static cardDnDSuccess(cardDnD) {
+    return {
+      type: CardActions.CARD_DND_SUCCESS,
+      cardDnD
+    };
+  }
+
+  static cardDnDFailure(error) {
+    return {
+      type: CardActions.CARD_DND_FAILURE,
       error
     };
   }

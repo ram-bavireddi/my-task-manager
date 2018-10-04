@@ -25,6 +25,7 @@ class Card extends Component {
     this.toggleCardEditModal = this.toggleCardEditModal.bind(this);
     this.onCardEdit = this.onCardEdit.bind(this);
     this.onCardDelete = this.onCardDelete.bind(this);
+    this.onDragStart = this.onDragStart.bind(this);
   }
 
   toggleCardModal() {
@@ -71,22 +72,33 @@ class Card extends Component {
   }
 
   onCardDelete(event) {
-    // this.props.card.title = '';
     this.props.onCardDelete(this.props.listKey, this.props.card.key);
     if (!this.props.cardDeleteLoading) {
       this.toggleCardEditModal(event);
     }
   }
 
+  onDragStart(event) {
+    event.dataTransfer.setData(
+      'card',
+      JSON.stringify({
+        fromList: this.props.listKey,
+        card: this.props.card
+      })
+    );
+  }
+
   render() {
-    if (!this.props.card.title) {
-      return null;
-    }
     return (
       <Fragment>
         {this.showModalOnCardClick()}
         {this.showCardEditModal()}
-        <div className="Card" onClick={this.toggleCardModal}>
+        <div
+          className="Card"
+          onClick={this.toggleCardModal}
+          draggable
+          onDragStart={this.onDragStart}
+        >
           <div className="card-title">{this.props.card.title}</div>
           <span className="card-edit" onClick={this.toggleCardEditModal}>
             <PencilIcon />

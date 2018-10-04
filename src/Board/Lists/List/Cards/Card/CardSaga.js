@@ -11,6 +11,10 @@ export default class CardSaga {
     yield takeLatest(CardActions.CARD_DELETE_REQUEST, CardSaga.deleteCard);
   }
 
+  static *cardDnDWatcher() {
+    yield takeLatest(CardActions.CARD_DND_REQUEST, CardSaga.cardDnD);
+  }
+
   static *editCard(action) {
     try {
       yield call(
@@ -38,6 +42,15 @@ export default class CardSaga {
       yield put(CardActions.cardDeleteSuccess(action.listKey, action.cardKey));
     } catch (e) {
       yield put(CardActions.cardDeleteFailure({ message: e.message }));
+    }
+  }
+
+  static *cardDnD(action) {
+    try {
+      yield call(TaskManagerApi.moveCardFromOneListToAnother, action.cardDnD);
+      yield put(CardActions.cardDnDSuccess(action.cardDnD));
+    } catch (e) {
+      yield put(CardActions.cardDnDFailure({ message: e.message }));
     }
   }
 }

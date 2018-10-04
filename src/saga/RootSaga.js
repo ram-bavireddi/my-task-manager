@@ -16,7 +16,8 @@ export default class RootSaga {
       fork(ListsSaga.watcher),
       fork(AddCardSaga.watcher),
       fork(CardSaga.editCardWatcher),
-      fork(CardSaga.deleteCardWatcher)
+      fork(CardSaga.deleteCardWatcher),
+      fork(CardSaga.cardDnDWatcher)
     ]);
   }
 }

@@ -2,9 +2,8 @@ import { firebase } from './FirebaseConfig';
 import Objects from '../utils/Objects';
 
 export default class TaskManagerApi {
-
   static PATH_TO_LISTS = '/lists';
-  
+
   static login(username, password) {
     return firebase
       .auth()
@@ -54,5 +53,17 @@ export default class TaskManagerApi {
       .ref(path)
       .child(key)
       .remove();
+  }
+
+  static moveCardFromOneListToAnother(cardDnD) {
+    TaskManagerApi.remove(
+      `${TaskManagerApi.PATH_TO_LISTS}/${cardDnD.fromList}/cards`,
+      cardDnD.card.key
+    );
+    const { key, title } = cardDnD.card;
+    TaskManagerApi.set(
+      `${TaskManagerApi.PATH_TO_LISTS}/${cardDnD.toList}/cards/${key}`,
+      { title }
+    );
   }
 }

@@ -20,6 +20,10 @@ export default class CardsReducer {
         return CardsReducer.cardEditSuccess(state, action);
       case CardActions.CARD_DELETE_SUCCESS:
         return CardsReducer.cardDeleteSuccess(state, action);
+      case CardActions.CARD_DND_SUCCESS:
+        return CardsReducer.cardDnDSuccess(state, action);
+      case CardActions.CARD_DND_FAILURE:
+        return CardsReducer.cardDnDFailure(state, action);
       default:
         return state;
     }
@@ -64,11 +68,52 @@ export default class CardsReducer {
   }
 
   static cardDeleteSuccess(state, action) {
-    const cardList = [...state.cardsMap[action.listKey]];
-    const index = cardList.findIndex(card => card.key === action.cardKey);
-    cardList.splice(index, 1);
+    const cardList = CardsReducer.deleteCardFromList(
+      state,
+      action.listKey,
+      action.cardKey
+    );
     return Objects.update(state, {
       cardsMap: Objects.update(state.cardsMap, { [action.listKey]: cardList })
     });
+  }
+
+  static cardDnDSuccess(state, action) {
+    const cardDnD = action.cardDnD;
+    const fromList = CardsReducer.deleteCardFromList(
+      state,
+      cardDnD.fromList,
+      cardDnD.card.key
+    );
+    const toList = CardsReducer.addCardToList(
+      state,
+      cardDnD.toList,
+      cardDnD.card
+    );
+    return Objects.update(state, {
+      cardsMap: Objects.update(state.cardsMap, {
+        [cardDnD.fromList]: fromList,
+        [cardDnD.toList]: toList
+      })
+    });
+  }
+
+  static cardDnDFailure(state, action) {
+    return Objects.update(state, {
+      error: action.error
+    });
+  }
+
+  static deleteCardFromList(state, listKey, cardKey) {
+    const cardList = [...state.cardsMap[listKey]];
+    const index = cardList.findIndex(card => card.key === cardKey);
+    cardList.splice(index, 1);
+    return cardList;
+  }
+
+  static addCardToList(state, listKey, card) {
+    const cardList = [...state.cardsMap[listKey]];
+    cardList.push(card);
+    return cardList;
   }
 }
